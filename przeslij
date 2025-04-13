@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zdjęcia ze zdarzeń</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #c0392b;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input[type="file"] {
+      margin-top: 5px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 10px;
+      padding: 10px;
+      resize: vertical;
+    }
+    button {
+      display: block;
+      margin: 20px auto 0 auto;
+      padding: 10px 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c0392b;
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2980b9;
+      text-decoration: none;
+    }
+    .back:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="index.html">&larr; Powrót do strony głównej</a>
+    <h2>Dodaj zdjęcie ze zdarzenia</h2>
+    <form action="#" method="post" enctype="multipart/form-data">
+      <label for="photo">Wybierz zdjęcie:</label>
+      <input type="file" id="photo" name="photo" accept="image/*" required>
+
+      <label for="desc">Opis zdarzenia:</label>
+      <textarea id="desc" name="desc" placeholder="Krótki opis sytuacji..." required></textarea>
+
+      <label for="unit">Jednostka:</label>
+      <input type="text" id="unit" name="unit" placeholder="Np. OSP Rakszawa" required>
+
+      <button type="submit">Wyślij zdjęcie</button>
+    </form>
+  </div>
+</body>
+</html>
