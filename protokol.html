@@ -272,7 +272,69 @@
     const formData = new FormData(this);
     const data = {};
     formData.forEach((value, key) => {
-      data[key] = value;
+      // Mapowanie kluczy na polskie odpowiedniki
+      switch(key) {
+        case 'municipality':
+          data['Miejscowość'] = value;
+          break;
+        case 'inspectionDate':
+          data['Data inspekcji'] = value;
+          break;
+        case 'unit':
+          data['Jednostka OSP'] = value;
+          break;
+        case 'address':
+          data['Adres'] = value;
+          break;
+        case 'inspectionTime':
+          data['Data i godzina inspekcji'] = value;
+          break;
+        case 'inspectorLeader':
+          data['Przewodniczący'] = value;
+          break;
+        case 'teamMembers':
+          data['Członkowie zespołu'] = value;
+          break;
+        case 'unitRepresentatives':
+          data['Przedstawiciele jednostki'] = value;
+          break;
+        case 'alerting':
+          data['Czas dysponowania siłami i środkami'] = value;
+          break;
+        case 'staffPresent':
+          data['Liczba strażaków obecnych'] = value;
+          break;
+        case 'psychophysical':
+          data['Ocena stanu psychofizycznego'] = value;
+          break;
+        case 'personalEquipment':
+          data['Wyposażenie osobiste'] = value;
+          break;
+        case 'vehicleStatus':
+          data['Sprawność pojazdów pożarniczych'] = value;
+          break;
+        case 'rescueEquipment':
+          data['Wyposażenie w sprzęt ratowniczy'] = value;
+          break;
+        case 'vehicleDocuments':
+          data['Aktualność dokumentów pojazdów'] = value;
+          break;
+        case 'remiseCondition':
+          data['Stan remizy i jej wyposażenia'] = value;
+          break;
+        case 'alarmAvailability':
+          data['Dostępność i sprawność środków alarmowania'] = value;
+          break;
+        case 'finalAssessment':
+          data['Ocena końcowa inspekcji'] = value;
+          break;
+        case 'additionalComments':
+          data['Uwagi końcowe'] = value;
+          break;
+        default:
+          data[key] = value; // Domyślnie przypisz wartość, jeśli nie mamy mapowania
+          break;
+      }
     });
 
     fetch('https://discord.com/api/webhooks/1361074105528488049/vLBNxVfYIqMZvsK7vzp2cVBZzG1snOlNQi44cLLZ_fydobV2HqpPP4VpET8Jy3i3h2pY', {
@@ -285,7 +347,7 @@
         embeds: [{
           title: "Protokół z inspekcji gotowości operacyjnej OSP",
           fields: Object.entries(data).map(([key, value]) => ({
-            name: key.replace(/([A-Z])/g, ' $1').toUpperCase(),
+            name: key,
             value: value || 'Brak danych'
           })),
         }],
