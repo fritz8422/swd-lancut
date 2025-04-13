@@ -2,81 +2,82 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zdjęcia ze zdarzeń</title>
+  <title>Przesyłanie zdjęć PSK Łańcut</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
+      font-family: sans-serif;
+      padding: 2em;
+      background-color: #f4f4f4;
     }
-    .container {
-      max-width: 600px;
-      margin: 30px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    form {
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    h2 {
-      text-align: center;
-      color: #c0392b;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-    }
-    input[type="file"] {
-      margin-top: 5px;
-    }
-    textarea {
+    input, textarea {
       width: 100%;
-      height: 100px;
-      margin-top: 10px;
-      padding: 10px;
-      resize: vertical;
+      margin-bottom: 1em;
+      padding: 0.7em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
     button {
-      display: block;
-      margin: 20px auto 0 auto;
-      padding: 10px 20px;
-      background-color: #e74c3c;
+      background-color: #25D366;
       color: white;
       border: none;
-      border-radius: 4px;
+      padding: 1em;
+      border-radius: 5px;
       cursor: pointer;
-    }
-    button:hover {
-      background-color: #c0392b;
-    }
-    .back {
-      display: inline-block;
-      margin-bottom: 20px;
-      color: #2980b9;
-      text-decoration: none;
-    }
-    .back:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back" href="index.html">&larr; Powrót do strony głównej</a>
-    <h2>Dodaj zdjęcie ze zdarzenia</h2>
-    <form action="#" method="post" enctype="multipart/form-data">
-      <label for="photo">Wybierz zdjęcie:</label>
-      <input type="file" id="photo" name="photo" accept="image/*" required>
 
-      <label for="desc">Opis zdarzenia:</label>
-      <textarea id="desc" name="desc" placeholder="Krótki opis sytuacji..." required></textarea>
+<form id="photoForm">
+  <h2>📷 Prześlij zdjęcie z akcji</h2>
+  <input type="text" id="unit" placeholder="Jednostka (np. OSP Rakszawa)" required />
+  <textarea id="desc" placeholder="Opis zdarzenia" required></textarea>
+  <input type="file" id="file" accept="image/*" required />
+  <button type="submit">📤 Wyślij do PSK Łańcut</button>
+</form>
 
-      <label for="unit">Jednostka:</label>
-      <input type="text" id="unit" name="unit" placeholder="Np. OSP Rakszawa" required>
+<script>
+  document.getElementById("photoForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-      <button type="submit">Wyślij zdjęcie</button>
-    </form>
-  </div>
+    const unit = document.getElementById("unit").value;
+    const desc = document.getElementById("desc").value;
+    const file = document.getElementById("file").files[0];
+
+    if (!file) return alert("Wybierz zdjęcie.");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("payload_json", JSON.stringify({
+      embeds: [{
+        title: "Nowa wiadomość Whatsapp dla PSK Łańcut",
+        description: `🚨 Nowe zdjęcie przesłane przez jednostkę **${unit}**:\n\n**Opis:** ${desc}`,
+        thumbnail: {
+          url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png"
+        },
+        footer: {
+          text: "Formularz przesyłania zdjęć • PSK Łańcut"
+        }
+      }]
+    }));
+
+    await fetch("https://discord.com/api/webhooks/1361026081334755428/jN0OJtmzo0j0tCnJV9BbJ4BDDq7NqRuhiclCmKHqFXuvFcpVNUsXwv_2KXcTX_mZc71U", {
+      method: "POST",
+      body: formData
+    });
+
+    alert("Wiadomość wysłana!");
+    document.getElementById("photoForm").reset();
+  });
+</script>
+
 </body>
 </html>
