@@ -45,17 +45,30 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    
+    }
+
+    a.back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #b30000;
+      font-weight: bold;
+      font-size: 16px;
+      background-color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
 
 <!-- Przycisk powrotu do strony głównej -->
-<a href="index.html">
-  <button class="back-btn">🔙 Powrót do strony głównej</button>
-</a>
+<a href="index.html" class="back-btn">← Powrót do strony głównej</a>
 
 <form id="photoForm">
-  <h2>📷 Prześlij zdjęcie z akcji</h2>
+  <h2>✉️ Przesyłanie wiadomości na numer Whatsapp: PSK Łańcut</h2>
   <input type="text" id="unit" placeholder="Jednostka (np. OSP Rakszawa)" required />
   <textarea id="desc" placeholder="Opis zdarzenia" required></textarea>
   <input type="file" id="file" accept="image/*" required />
