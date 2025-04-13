@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Protokół z inspekcji gotowości operacyjnej OSP w KSRG</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background-color: #f4f4f4;
+    }
+    .container {
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1em;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7em;
+      margin: 1em 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+
+    header {
+      background-color: #b30000;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    a.back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #b30000;
+      font-weight: bold;
+      font-size: 16px;
+      background-color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+  </style>
+</head>
+<body>
+    
+    <header>
+        <h1>System Wspomagania Decyzji PSP Łańcut</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png" style="height: 100px; width: 90px;">
+      </header>
+
+
+
+<div class="container">
+    <a href="index.html" class="back-btn">← Powrót do strony głównej</a> <br>
+  <h1>Protokół z inspekcji gotowości operacyjnej OSP w KSRG</h1>
+
+  <form id="inspectionForm">
+    <label for="municipality">Miejscowość:</label>
+    <input type="text" id="municipality" name="municipality" required>
+
+    <label for="inspectionDate">Data inspekcji:</label>
+    <input type="date" id="inspectionDate" name="inspectionDate" required>
+
+    <label for="unit">Jednostka OSP:</label>
+    <input type="text" id="unit" name="unit" required>
+
+    <label for="address">Adres:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="inspectionTime">Data i godzina inspekcji:</label>
+    <input type="datetime-local" id="inspectionTime" name="inspectionTime" required>
+
+    <h3>Zespół inspekcyjny</h3>
+    <label for="inspectorLeader">Przewodniczący:</label>
+    <input type="text" id="inspectorLeader" name="inspectorLeader" required>
+
+    <label for="teamMembers">Członkowie:</label>
+    <input type="text" id="teamMembers" name="teamMembers" required>
+
+    <label for="unitRepresentatives">Obecni przedstawiciele jednostki:</label>
+    <input type="text" id="unitRepresentatives" name="unitRepresentatives" required>
+
+    <h3>Oceny kryteriów</h3>
+    <label for="alerting">Czas dysponowania siłami i środkami:</label>
+    <select id="alerting" name="alerting" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="staffPresent">Liczba strażaków obecnych:</label>
+    <select id="staffPresent" name="staffPresent" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="psychophysical">Ocena stanu psychofizycznego:</label>
+    <select id="psychophysical" name="psychophysical" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="personalEquipment">Wyposażenie osobiste:</label>
+    <select id="personalEquipment" name="personalEquipment" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="vehicleStatus">Sprawność pojazdów pożarniczych:</label>
+    <select id="vehicleStatus" name="vehicleStatus" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="rescueEquipment">Wyposażenie w sprzęt ratowniczy:</label>
+    <select id="rescueEquipment" name="rescueEquipment" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="vehicleDocuments">Aktualność dokumentów pojazdów:</label>
+    <select id="vehicleDocuments" name="vehicleDocuments" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="remiseCondition">Stan remizy i jej wyposażenia:</label>
+    <select id="remiseCondition" name="remiseCondition" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <label for="alarmAvailability">Dostępność i sprawność środków alarmowania:</label>
+    <select id="alarmAvailability" name="alarmAvailability" required>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+
+    <h3>Ocena końcowa inspekcji</h3>
+    <label for="finalAssessment">Ocena:</label>
+    <select id="finalAssessment" name="finalAssessment" required>
+      <option value="bardzo_dobra">Bardzo dobra</option>
+      <option value="dobra">Dobra</option>
+      <option value="dostateczna">Dostateczna</option>
+      <option value="niedostateczna">Niedostateczna</option>
+    </select>
+
+    <label for="additionalComments">Uwagi końcowe:</label>
+    <textarea id="additionalComments" name="additionalComments" rows="4"></textarea>
+
+    <button type="submit">Prześlij protokół</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('inspectionForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    fetch('https://discord.com/api/webhooks/1361074105528488049/vLBNxVfYIqMZvsK7vzp2cVBZzG1snOlNQi44cLLZ_fydobV2HqpPP4VpET8Jy3i3h2pY', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        content: "Nowy protokół inspekcji gotowości operacyjnej OSP",
+        embeds: [{
+          title: "Protokół z inspekcji gotowości operacyjnej OSP",
+          fields: Object.entries(data).map(([key, value]) => ({
+            name: key.replace(/([A-Z])/g, ' $1').toUpperCase(),
+            value: value || 'Brak danych'
+          })),
+        }],
+      }),
+    }).then(response => response.json())
+      .then(() => alert('Protokół został wysłany!'))
+      .catch(error => alert('Wystąpił błąd, spróbuj ponownie.'));
+  });
+</script>
+
+</body>
+</html>
