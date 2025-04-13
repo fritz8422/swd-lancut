@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Notatki</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Notatki</h1>
+  </header>
+  <nav>
+    <a href="index.html">Start</a>
+    <a href="notatki.html">Notatki</a>
+    <a href="baza.html">Baza</a>
+    <a href="plany.html">Plany</a>
+    <a href="wyjazdy.html">Wyjazdy</a>
+    <a href="wspolpraca.html">Współpraca</a>
+  </nav>
+  <div class="container">
+    <h2>Twoje notatki</h2>
+
+    <form id="noteForm">
+      <label for="noteText">Notatka</label>
+      <textarea id="noteText" rows="5" placeholder="Wpisz swoją notatkę..."></textarea>
+
+      <label for="departureTime">Godzina wyjazdu</label>
+      <input type="time" id="departureTime">
+
+      <label for="arrivalTime">Godzina dojazdu</label>
+      <input type="time" id="arrivalTime">
+
+      <label for="endTime">Godzina zakończenia działań</label>
+      <input type="time" id="endTime">
+
+      <label for="returnTime">Godzina powrotu</label>
+      <input type="time" id="returnTime">
+
+      <label for="unit">Zastęp</label>
+      <input type="text" id="unit" placeholder="Np. GBA, GLBM, SLRr...">
+
+      <button type="submit">Zapisz w bazie</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('noteForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const note = document.getElementById('noteText').value;
+      const departure = document.getElementById('departureTime').value;
+      const arrival = document.getElementById('arrivalTime').value;
+      const end = document.getElementById('endTime').value;
+      const ret = document.getElementById('returnTime').value;
+      const unit = document.getElementById('unit').value;
+
+      const content = `📋 **Nowa notatka z interwencji**\n\n🕒 Wyjazd: ${departure}\n🕒 Dojazd: ${arrival}\n🕒 Zakończenie: ${end}\n🕒 Powrót: ${ret}\n🚒 Zastęp: ${unit}\n📝 Notatka:\n${note}`;
+
+      fetch('https://discord.com/api/webhooks/TUTAJ_TWÓJ_WEBHOOK', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ content })
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Notatka wysłana!');
+          form.reset();
+        } else {
+          alert('Błąd podczas wysyłania.');
+        }
+      })
+      .catch(error => {
+        console.error('Błąd:', error);
+        alert('Wystąpił problem z połączeniem.');
+      });
+    });
+  </script>
+</body>
+</html>
