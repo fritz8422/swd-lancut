@@ -80,7 +80,7 @@
 </a>
 
   <div class="container">
-    <h2>Rejestr godzin interwencji</h2>
+    <h2>Meldunek z wyjazdu zastępu</h2>
     <label for="zastepy">Zastęp:</label>
     <select name="zastepy" id="zastepy">
       <option value="RF 491-21">RF 491-21</option>
@@ -110,9 +110,9 @@
     <input type="time" id="powrot">
 
     <label>Treść meldunku:</label>
-    <textarea id="notatka" rows="4" placeholder="Opisz przebieg działań..."></textarea>
+    <textarea id="notatka" rows="4" placeholder="Krótki opis interwencji..."></textarea>
 
-    <button onclick="wyslijNotatke()">Zapisz w bazie</button>
+    <button onclick="wyslijNotatke()">Prześlij meldunek</button>
 
     <hr>
 
@@ -149,7 +149,7 @@
     <label>Opis wyjazdu:</label>
     <textarea id="opisRejestr" rows="3" placeholder="Opisz cel wyjazdu..."></textarea>
 
-    <button onclick="wyslijRejestr()">Zapisz w rejestrze</button>
+    <button onclick="wyslijRejestr()">Zapisz meldunek w rejestrze</button>
   </div>
 
   <script>
