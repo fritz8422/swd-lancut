@@ -1,82 +1,215 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Notatki</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Panel Dowodzenia - Notatki</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 40px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #b30000;
+    }
+
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #b30000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #8c0000;
+    }
+
+    hr {
+      margin: 40px 0;
+      border: none;
+      height: 2px;
+      background-color: #ccc;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Notatki</h1>
-  </header>
-  <nav>
-    <a href="index.html">Start</a>
-    <a href="notatki.html">Notatki</a>
-    <a href="baza.html">Baza</a>
-    <a href="plany.html">Plany</a>
-    <a href="wyjazdy.html">Wyjazdy</a>
-    <a href="wspolpraca.html">Współpraca</a>
-  </nav>
+    <a href="index.html" style="
+  display: inline-block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #b30000;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+">
+  ← Powrót do strony głównej
+</a>
+
   <div class="container">
-    <h2>Twoje notatki</h2>
+    <h2>Rejestr wyjazdów</h2>
+    <label for="zastepy">Zastęp:</label>
+    <select name="zastepy" id="zastepy">
+      <option value="RF 491-21">RF 491-21</option>
+      <option value="RF 491-22">RF 491-22</option>
+      <option value="RF 491-25">RF 491-25</option>
+      <option value="RF 491-50">RF 491-50</option>
+      <option value="RF 491-53">RF 491-53</option>
+      <option value="RF 491-90">RF 491-90</option>
+      <option value="RF 490-90">RF 490-90</option>
+      <option value="RF 490-91">RF 490-91</option>
+      <option value="RF 490-92">RF 490-92</option>
+      <option value="other">WPROWADŹ WŁASNY</option>
+    </select>
+    <label for="customZastep">Wprowadź własny zastęp:</label>
+    <input type="text" id="customZastep" placeholder="Wprowadź zastęp">
 
-    <form id="noteForm">
-      <label for="noteText">Notatka</label>
-      <textarea id="noteText" rows="5" placeholder="Wpisz swoją notatkę..."></textarea>
+    <label>Godzina wyjazdu:</label>
+    <input type="time" id="wyjazd">
 
-      <label for="departureTime">Godzina wyjazdu</label>
-      <input type="time" id="departureTime">
+    <label>Godzina dojazdu:</label>
+    <input type="time" id="dojazd">
 
-      <label for="arrivalTime">Godzina dojazdu</label>
-      <input type="time" id="arrivalTime">
+    <label>Zakończenie działań:</label>
+    <input type="time" id="zakonczenie">
 
-      <label for="endTime">Godzina zakończenia działań</label>
-      <input type="time" id="endTime">
+    <label>Powrót do jednostki:</label>
+    <input type="time" id="powrot">
 
-      <label for="returnTime">Godzina powrotu</label>
-      <input type="time" id="returnTime">
+    <label>Treść meldunku:</label>
+    <textarea id="notatka" rows="4" placeholder="Opisz przebieg działań..."></textarea>
 
-      <label for="unit">Zastęp</label>
-      <input type="text" id="unit" placeholder="Np. GBA, GLBM, SLRr...">
+    <button onclick="wyslijNotatke()">Zapisz w bazie</button>
 
-      <button type="submit">Zapisz w bazie</button>
-    </form>
+    <hr>
+
+    <h2>Meldunek wyjazdu</h2>
+
+    <label>Rodzaj wyjazdu:</label>
+    <select id="typWyjazdu">
+      <option value="CW">CW – Ćwiczenia</option>
+      <option value="WG">WG – Wyjazd gospodarczy</option>
+      <option value="PZR">PZR – Zabezpieczenie rejonu</option>
+      <option value="MZ/L">MZ/L – Zabezpieczenie imprezy masowej</option>
+    </select>
+
+    <label>Zastęp:</label>
+    <select name="zastepy" id="zastepRejestr">
+      <option value="RF 491-21">RF 491-21</option>
+      <option value="RF 491-22">RF 491-22</option>
+      <option value="RF 491-25">RF 491-25</option>
+      <option value="RF 491-50">RF 491-50</option>
+      <option value="RF 491-53">RF 491-53</option>
+      <option value="RF 491-90">RF 491-90</option>
+      <option value="RF 490-90">RF 490-90</option>
+      <option value="RF 490-91">RF 490-91</option>
+      <option value="RF 490-92">RF 490-92</option>
+      <option value="other">WPROWADŹ WŁASNY</option>
+    </select>
+    <label for="customZastepRejestr">Wprowadź własny zastęp:</label>
+    <input type="text" id="customZastepRejestr" placeholder="Wprowadź zastęp">
+
+    <label>Opis wyjazdu:</label>
+    <textarea id="opisRejestr" rows="3" placeholder="Opisz cel wyjazdu..."></textarea>
+
+    <button onclick="wyslijRejestr()">Zapisz w rejestrze</button>
   </div>
 
   <script>
-    const form = document.getElementById('noteForm');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+    const webhookURL = "https://discord.com/api/webhooks/1361026081334755428/jN0OJtmzo0j0tCnJV9BbJ4BDDq7NqRuhiclCmKHqFXuvFcpVNUsXwv_2KXcTX_mZc71U";
 
-      const note = document.getElementById('noteText').value;
-      const departure = document.getElementById('departureTime').value;
-      const arrival = document.getElementById('arrivalTime').value;
-      const end = document.getElementById('endTime').value;
-      const ret = document.getElementById('returnTime').value;
-      const unit = document.getElementById('unit').value;
+    function wyslijNotatke() {
+  const zastep = document.getElementById("zastepy").value === "other" ? document.getElementById("customZastep").value : document.getElementById("zastepy").value;
+  const wyjazd = document.getElementById("wyjazd").value;
+  const dojazd = document.getElementById("dojazd").value;
+  const zakonczenie = document.getElementById("zakonczenie").value;
+  const powrot = document.getElementById("powrot").value;
+  const notatka = document.getElementById("notatka").value;
 
-      const content = `📋 **Nowa notatka z interwencji**\n\n🕒 Wyjazd: ${departure}\n🕒 Dojazd: ${arrival}\n🕒 Zakończenie: ${end}\n🕒 Powrót: ${ret}\n🚒 Zastęp: ${unit}\n📝 Notatka:\n${note}`;
+  const data = {
+    embeds: [{
+      title: "📝 Nowy meldunek w terminalu: Przesłano godziny interwencji",
+      color: 15158332,
+      fields: [
+        { name: "Zastęp", value: zastep || "-", inline: true },
+        { name: "Wyjazd", value: wyjazd || "-", inline: true },
+        { name: "Dojazd", value: dojazd || "-", inline: true },
+        { name: "Zakończenie", value: zakonczenie || "-", inline: true },
+        { name: "Powrót", value: powrot || "-", inline: true },
+        { name: "Notatka", value: notatka || "-", inline: false }
+      ],
+      timestamp: new Date().toISOString()
+    }]
+  };
 
-      fetch('https://discord.com/api/webhooks/TUTAJ_TWÓJ_WEBHOOK', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ content })
-      })
-      .then(response => {
-        if (response.ok) {
-          alert('Notatka wysłana!');
-          form.reset();
-        } else {
-          alert('Błąd podczas wysyłania.');
-        }
-      })
-      .catch(error => {
-        console.error('Błąd:', error);
-        alert('Wystąpił problem z połączeniem.');
-      });
-    });
+  fetch(webhookURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  }).then(() => alert("Notatka wysłana!"));
+}
+
+function wyslijRejestr() {
+  const typ = document.getElementById("typWyjazdu").value;
+  const zastep = document.getElementById("zastepRejestr").value === "other" ? document.getElementById("customZastepRejestr").value : document.getElementById("zastepRejestr").value;
+  const opis = document.getElementById("opisRejestr").value;
+
+  const data = {
+    embeds: [{
+      title: "📘 Zanotowano nowy element w rejestrze wyjazdów",
+      color: 3447003,
+      fields: [
+        { name: "Typ wyjazdu", value: typ, inline: true },
+        { name: "Zastęp", value: zastep || "-", inline: true },
+        { name: "Opis", value: opis || "-", inline: false }
+      ],
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  fetch(webhookURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  }).then(() => alert("Wyjazd zapisany!"));
+}
   </script>
 </body>
 </html>
