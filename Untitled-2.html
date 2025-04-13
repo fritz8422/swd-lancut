@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>SWD PSP Łańcut</title>
+  <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    #loginScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #d0d0d0; /* Szare tło */
+      color: black;
+    }
+
+    #loginScreen h1 {
+      margin-bottom: 20px;
+      font-size: 32px;
+      color: #333;
+    }
+
+    #loginScreen input {
+      padding: 10px;
+      font-size: 18px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 6px;
+      width: 250px;
+      background-color: white;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #loginScreen button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #b30000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #loginScreen button:hover {
+      background-color: #8c0000;
+    }
+
+    #mainContent {
+      display: none;
+    }
+
+    header {
+      background-color: #b30000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #8c0000;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #b30000;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #000000;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #b30000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #8c0000;
+    }
+
+    .checkbox-group {
+      margin-top: 10px;
+    }
+
+    .checkbox-group label {
+      display: inline-block;
+      margin-right: 15px;
+      font-size: 13px;
+      font-weight: normal;
+      color: #333;
+    }
+
+    small {
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loginScreen" style="container: ;">
+  <h1>SWD PSP Łańcut - Logowanie</h1>
+  <p>Wprowadź klucz dostępu</p>
+  <input type="password" id="accessKey" placeholder="Klucz dostępu">
+  <button onclick="checkAccess()">Zaloguj</button>
+</div>
+
+
+<div id="mainContent">
+
+  <div class="container">
+    <header>
+      <h1>System Wspomagania Decyzji PSP Łańcut</h1>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png" style="height: 100px; width: 90px;">
+    </header>
+  
+    <nav>
+      <a href="#">Baza Sił i Środków</a>
+      <a href="#">Notatki</a>
+      <a href="#">Plany Ratownicze</a>
+      <a href="#">Współdziałanie SI CPR</a>
+      <a href="#">Rejestr Wyjazdów</a>
+    </nav>
+  
+    <div class="container">
+      <h2>Meldunek / IZZ</h2>
+      <form id="meldunekForm">
+        <label for="godzinaWyjazdu">Godzina wyjazdu do działań</label>
+        <input type="datetime-local" id="godzinaWyjazdu" name="godzinaWyjazdu" required>
+  
+        <label for="adres">Adres / miejscowość prowadzonych działań</label>
+        <input type="text" id="adres" name="adres" required>
+  
+        <label for="rodzajZdarzenia">Rodzaj zdarzenia</label>
+  <select id="rodzajZdarzenia" name="rodzajZdarzenia" required>
+    <option value="">-- Wybierz --</option>
+    <option value="P">P</option>
+    <option value="MZ">MZ</option>
+    <option value="AF instalacja">AF instalacja</option>
+    <option value="AF w dobrej wierze">AF w dobrej wierze</option>
+    <option value="AF złośliwy">AF złośliwy</option>
+  </select>
+  
+  
+        <label>Flaga zdarzenia szczególnego<br><small>(W przypadku braku konieczności zostawić puste)</small></label>
+  <div class="checkbox-group">
+    <label><input type="checkbox" name="flaga" value="DO WIADOMOŚCI KW PSP"> DO WIADOMOŚCI KW PSP</label>
+    <label><input type="checkbox" name="flaga" value="DO WIADOMOŚCI KG PSP"> DO WIADOMOŚCI KG PSP</label>
+    <label><input type="checkbox" name="flaga" value="ZAGROŻENIE CBRNE"> ZAGROŻENIE CBRNE</label>
+    <label><input type="checkbox" name="flaga" value="IZRM"> IZRM</label>
+    <label><input type="checkbox" name="flaga" value="POMOC POLICJI/ZRM"> POMOC POLICJI/ZRM</label>
+    <label><input type="checkbox" name="flaga" value="LPR_KSWL (Zabezpieczenie lądowania)"> LPR_KSWL (Zabezpieczenie lądowania)</label>
+    <label><input type="checkbox" name="flaga" value="NIEPRZEJEZDNOŚĆ DK/A"> NIEPRZEJEZDNOŚĆ DK/A</label>
+    <label><input type="checkbox" name="flaga" value="WYPADEK POJAZDU PSP/OSP/RATOWNIKA"> WYPADEK POJAZDU PSP/OSP/RATOWNIKA</label>
+  </div>
+  
+        <label for="zastepy">Zastępy biorące udział w działaniach</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="zastepy" value="RF 491-21"> RF 491-21</label>
+          <label><input type="checkbox" name="zastepy" value="RF 491-22"> RF 491-22</label>
+          <label><input type="checkbox" name="zastepy" value="RF 491-25"> RF 491-25</label>
+          <label><input type="checkbox" name="zastepy" value="RF 491-53"> RF 491-53</label>
+          <label><input type="checkbox" name="zastepy" value="RF 491-90"> RF 491-90</label>
+          <label><input type="checkbox" name="zastepy" value="RF 490-90"> RF 490-90</label>
+          <label><input type="checkbox" name="zastepy" value="RF 490-91"> RF 490-91</label>
+          <label><input type="checkbox" name="zastepy" value="W TYM GRUPA OPERACYJNA"> W TYM GRUPA OPERACYJNA</label>
+          <label><input type="checkbox" name="zastepy" value="Policja"> Policja</label>
+          <label><input type="checkbox" name="zastepy" value="ZRM"> ZRM</label>
+        </div>
+  
+        <label for="opis">Opis prowadzonych działań</label>
+        <textarea id="opis" name="opis" rows="4" required></textarea>
+  
+        <label for="obsada">Obsada pojazdu/pojazdów</label>
+        <textarea id="obsada" name="obsada" rows="2"></textarea>
+  
+        <label for="miejsce">Miejsce zdarzenia zostało przekazane</label>
+        <input type="text" id="miejsce" name="miejsce">
+  
+        <label for="osoba">Osoba sporządzająca meldunek</label>
+        <input type="text" id="osoba" name="osoba" required>
+  
+        <label for="kdr">Kierujący Działaniem Ratowniczym</label>
+        <input type="text" id="kdr" name="kdr" required>
+  
+        <button type="button" onclick="sendDiscord('MELDUNEK')">Wyślij Meldunek</button>
+        <button type="button" onclick="sendDiscord('IZZ')">Wyślij IZZ</button>
+      </form>
+    </div>
+  
+    <script>
+      function sendDiscord(type) {
+        const godzinaWyjazdu = document.getElementById('godzinaWyjazdu').value;
+        const adres = document.getElementById('adres').value;
+        const zastepy = Array.from(document.querySelectorAll('input[name="zastepy"]:checked')).map(cb => cb.value).join(", ");
+        const opis = document.getElementById('opis').value;
+        const obsada = document.getElementById('obsada').value;
+        const miejsce = document.getElementById('miejsce').value;
+        const rodzajZdarzenia = document.getElementById('rodzajZdarzenia').value;
+        const osoba = document.getElementById('osoba').value;
+        const kdr = document.getElementById('kdr').value;
+        
+        const flagi = Array.from(document.querySelectorAll('input[name="flaga"]:checked')).map(cb => cb.value);
+        const flagiText = flagi.length > 0 ? flagi.join(", ") : "Brak";
+    
+        const embed = {
+          title: `🚨 ${type} - PSP ŁAŃCUT 🚨`,
+          color: 0xFF0000,
+          thumbnail: {
+            url: "https://sbihp.pl/wp-content/uploads/2022/04/Panstwowa-Straz-Pozarna.png"
+          },
+          fields: [
+            {
+              name: "```Godzina wyjazdu```",
+              value: godzinaWyjazdu || "Brak",
+              inline: false
+            },
+            {
+              name: "```Rodzaj zdarzenia```",
+              value: rodzajZdarzenia || "Brak",
+              inline: false
+            },
+            {
+              name: "```Adres```",
+              value: adres || "Brak",
+              inline: false
+            },
+            {
+              name: "```Zastępy```",
+              value: zastepy || "Brak",
+              inline: false
+            },
+            {
+              name: "```Opis działań```",
+              value: opis || "Brak",
+              inline: false
+            },
+            {
+              name: "```Obsada```",
+              value: obsada || "Brak",
+              inline: false
+            },
+            {
+              name: "```Miejsce przekazane```",
+              value: miejsce || "Brak",
+              inline: false
+            },
+            {
+              name: "```Zdarzenie szczególne```",
+              value: flagiText,
+              inline: false
+            },
+            {
+              name: "```Sporządzający```",
+              value: osoba || "Brak",
+              inline: false
+            },
+            {
+              name: "```Kierujący Działaniem Ratowniczym```",
+              value: kdr || "Brak",
+              inline: false
+            }
+          ],
+          footer: {
+            text: "SWD PSP Łańcut"
+          },
+          timestamp: new Date().toISOString()
+        };
+    
+        fetch("https://discord.com/api/webhooks/1361014475255189730/qizJ_NC0hnbtyL-fl2yD86pge4o02gpda_usNq3Rpt36vnos9gkusATGYWk16y53NrVk", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            content: `**Nowy Wpis w systemie SWD ST: ${type}**`,
+            embeds: [embed]
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            alert("Wysłano pomyślnie!");
+            document.getElementById("meldunekForm").reset();
+          } else {
+            alert("Błąd podczas wysyłania.");
+          }
+        });
+      }
+    </script>
+</div>
+
+<script>
+  function checkAccess() {
+    const key = document.getElementById('accessKey').value;
+    const correctKey = "1234"; // <- tutaj możesz zmienić klucz dostępu
+
+    if (key === correctKey) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    } else {
+      alert("Niepoprawny klucz dostępu.");
+    }
+  }
+</script>
+
+</body>
+</html>
