@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Numer telefoniczny PSK Łańcut</title>
+  <title>Przesyłanie wiadomości na numer Whatsapp: PSK Łańcut</title>
   <style>
     body {
       font-family: sans-serif;
@@ -51,7 +51,7 @@
 
 <!-- Przycisk powrotu do strony głównej -->
 <a href="index.html">
-  <button class="back-btn">← Powrót do strony głównej</button>
+  <button class="back-btn">🔙 Powrót do strony głównej</button>
 </a>
 
 <form id="photoForm">
@@ -75,6 +75,7 @@
     const formData = new FormData();
     formData.append("file", file);
     formData.append("payload_json", JSON.stringify({
+      content: "<@&1307484299158880266>",  // Ping roli
       embeds: [{
         title: "Nowa wiadomość Whatsapp dla PSK Łańcut",
         description: `🚨 Nowe zdjęcie przesłane przez jednostkę **${unit}**:\n\n**Opis:** ${desc}`,
