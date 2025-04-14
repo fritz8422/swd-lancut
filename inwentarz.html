@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWD Formularze</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #b30000;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    a.back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #b30000;
+      font-weight: bold;
+      font-size: 16px;
+      background-color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+    .pojazd-container {
+      max-width: 1100px;
+      margin: 2em auto;
+      font-family: sans-serif;
+    }
+
+    .pojazdy-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      justify-content: center;
+    }
+
+    .pojazd {
+      flex: 1 1 calc(50% - 2em);
+      background-color: #fff;
+      padding: 1.5em;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+
+    .pojazd h2 {
+      color: #b30000;
+      border-bottom: 2px solid #b30000;
+      padding-bottom: 0.3em;
+      margin-bottom: 1em;
+    }
+
+    .przedzial {
+      margin-bottom: 1em;
+    }
+
+    .przedzial h3 {
+      margin: 0.5em 0 0.3em;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .przedzial ul {
+      list-style: disc;
+      padding-left: 1.5em;
+      margin: 0;
+    }
+
+    .przedzial ul li {
+      margin-bottom: 0.3em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>System Wspomagania Decyzji PSP Łańcut</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png" style="height: 100px; width: 90px;">
+  </header>
+
+  <div class="pojazd-container">
+    <div class="pojazdy-grid">
+
+      <div class="pojazd">
+        <h2>PF 491-53</h2>
+        <div class="przedzial">
+          <h3>K1</h3>
+          <ul><li>Piła szablista</li></ul>
+        </div>
+        <div class="przedzial">
+          <h3>K2</h3>
+          <ul><li>PSP R1</li></ul>
+        </div>
+        <div class="przedzial">
+          <h3>D1</h3>
+          <ul>
+            <li>Latarka</li>
+            <li>Podkładka</li>
+            <li>Lizak drogowy</li>
+            <li>Gwizdek</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D2</h3>
+          <ul>
+            <li>Husky z pilarki</li>
+            <li>Miernik</li>
+            <li>Kamera termowizyjna</li>
+            <li>Gaśnica</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pojazd">
+        <h2>PF 491-21</h2>
+        <div class="przedzial">
+          <h3>K1</h3>
+          <ul>
+            <li>Rozpieracz</li>
+            <li>Nożyce</li>
+            <li>Pilarka szablista</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>K2</h3>
+          <ul>
+            <li>Bosak</li>
+            <li>Taśma</li>
+            <li>Łopata</li>
+            <li>Łom</li>
+            <li>Haligan</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>K3</h3>
+          <ul>
+            <li>PSP R1</li>
+            <li>Worek sorbentu</li>
+            <li>Miotła</li>
+            <li>Szczotka</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D1</h3>
+          <ul>
+            <li>Latarka</li>
+            <li>Podkładka</li>
+            <li>Lizak drogowy</li>
+            <li>Gwizdek</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D2</h3>
+          <ul>
+            <li>Husky z pilarka</li>
+            <li>Miernik</li>
+            <li>Kamera termowizyjna</li>
+            <li>Gaśnica</li>
+            <li>Pilarka do betonu</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D3</h3>
+          <ul>
+            <li>Wytwornica pianowa</li>
+            <li>Wąż W-75</li>
+            <li>Wycior kominowy</li>
+            <li>Tłumica</li>
+            <li>Prądownica</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pojazd">
+        <h2>PF 491-22</h2>
+        <div class="przedzial">
+          <h3>K1</h3>
+          <ul>
+            <li>Rozpieracz</li>
+            <li>Nożyce</li>
+            <li>Pilarka szablista</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>K2</h3>
+          <ul>
+            <li>Bosak</li>
+            <li>Taśma</li>
+            <li>Łopata</li>
+            <li>Łom</li>
+            <li>Haligan</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>K3</h3>
+          <ul>
+            <li>PSP R1</li>
+            <li>Worek sorbentu</li>
+            <li>Miotła</li>
+            <li>Szczotka</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D1</h3>
+          <ul>
+            <li>Latarka</li>
+            <li>Podkładka</li>
+            <li>Lizak drogowy</li>
+            <li>Gwizdek</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D2</h3>
+          <ul>
+            <li>Husky z pilarka</li>
+            <li>Miernik</li>
+            <li>Kamera termowizyjna</li>
+            <li>Gaśnica</li>
+            <li>Pilarka do betonu</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D3</h3>
+          <ul>
+            <li>Wytwornica pianowa</li>
+            <li>Wąż W-75</li>
+            <li>Wycior kominowy</li>
+            <li>Tłumica</li>
+            <li>Prądownica</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pojazd">
+        <h2>PF 491-25</h2>
+        <div class="przedzial">
+          <h3>K1</h3>
+          <ul>
+            <li>Rozpieracz</li>
+            <li>Nożyce</li>
+            <li>Pilarka szablista</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>K2</h3>
+          <ul>
+            <li>Bosak</li>
+            <li>Taśma</li>
+            <li>Łopata</li>
+            <li>Łom</li>
+            <li>Haligan</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>K3</h3>
+          <ul>
+            <li>PSP R1</li>
+            <li>Worek sorbentu</li>
+            <li>Miotła</li>
+            <li>Szczotka</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D1</h3>
+          <ul>
+            <li>Latarka</li>
+            <li>Podkładka</li>
+            <li>Lizak drogowy</li>
+            <li>Gwizdek</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D2</h3>
+          <ul>
+            <li>Husky z pilarka</li>
+            <li>Miernik</li>
+            <li>Kamera termowizyjna</li>
+            <li>Gaśnica</li>
+            <li>Pilarka do betonu</li>
+          </ul>
+        </div>
+        <div class="przedzial">
+          <h3>D3</h3>
+          <ul>
+            <li>Wytwornica pianowa</li>
+            <li>Wąż W-75</li>
+            <li>Wycior kominowy</li>
+            <li>Tłumica</li>
+            <li>Prądownica</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
