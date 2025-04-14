@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWD Formularze</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background-color: #f4f4f4;
+    }
+    .container {
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1em;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7em;
+      margin: 1em 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+
+    header {
+      background-color: #b30000;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    a.back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #b30000;
+      font-weight: bold;
+      font-size: 16px;
+      background-color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+  </style>
+</head>
+<body>
+    
+    <header>
+        <h1>System Wspomagania Decyzji PSP Łańcut</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png" style="height: 100px; width: 90px;">
+      </header>
+
+
+
+<div class="container">
+    <a href="index.html" class="back-btn">← Powrót do strony głównej</a> <br>
+  <h1>Formularze zgłoszeniowe SK-T</h1>
+
+  <!-- Tankowanie -->
+  <form id="tankowanie">
+    <h2>Tankowanie</h2>
+    <input name="Numer operacyjny pojazdu" placeholder="Numer operacyjny pojazdu" required />
+    <input name="Godzina Wyjazdu" placeholder="Godzina Wyjazdu" required />
+    <input name="Godzina Powrotu" placeholder="Godzina Powrotu" required />
+    <input name="Cel wyjazdu" placeholder="Cel wyjazdu" required />
+    <input name="Ilość zatankowanych Litrów" placeholder="Ilość zatankowanych Litrów" required />
+    <input name="Koszt" placeholder="Koszt" required />
+    <input name="Kto wypisuje" placeholder="Kto wypisuje" required />
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <!-- Braki w butlach -->
+  <form id="butle">
+    <h2>Braki w butlach</h2>
+    <input name="Data" placeholder="Data" required />
+    <input name="Ilość butli" placeholder="Ilość butli" required />
+    <input name="Wóz" placeholder="Wóz z którego zostały użyte" required />
+    <input name="Podpis" placeholder="Podpis (stopień, imię nazwisko)" required />
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <!-- Faktury inne -->
+  <form id="faktury">
+    <h2>Faktury inne</h2>
+    <input name="Data" placeholder="Data" required />
+    <input name="Numer operacyjny wozu" placeholder="Numer operacyjny wozu" required />
+    <input name="Godzina wyjazdu" placeholder="Godzina wyjazdu" required />
+    <input name="Godzina powrotu" placeholder="Godzina powrotu" required />
+    <textarea name="Produkty" placeholder="Produkt/y kupny/e" required></textarea>
+    <input name="Cena" placeholder="Cena produktu kupnego" required />
+    <input name="Sklep" placeholder="Sklep" required />
+    <input name="Podpis" placeholder="Podpis (stopień, imię nazwisko)" required />
+    <button type="submit">Wyślij</button>
+  </form>
+
+  <script>
+    const webhook = "https://discord.com/api/webhooks/1361236876442341476/p1tzZFERgA7aEpUMJgUOpL5-GtVz_XyjzyrEDUqnFoKjfSmEYmTb8iY3omSWnielsG5c";
+  
+    document.querySelectorAll("form").forEach(form => {
+      form.addEventListener("submit", async e => {
+        e.preventDefault();
+  
+        const data = new FormData(form);
+        const fields = [...data.entries()].map(([key, value]) => ({ name: key, value }));
+  
+        const embed = {
+          title: form.querySelector("h2").innerText,
+          color: 0xFF0000,
+          thumbnail: { url: "https://sbihp.pl/wp-content/uploads/2022/04/Panstwowa-Straz-Pozarna.png" },
+          fields: fields.map(f => ({ name: f.name, value: f.value || "brak", inline: false })),
+          timestamp: new Date().toISOString()
+        };
+  
+        await fetch(webhook, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ embeds: [embed] })
+        });
+  
+        alert("Wysłano pomyślnie!");
+        form.reset();
+      });
+    });
+  </script>
+  
+</body>
+</html>
