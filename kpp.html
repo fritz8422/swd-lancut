@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Karta udzielanej KPP</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    form {
+      background: white;
+      padding: 2em;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    h2 {
+      text-align: center;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .checkbox-group {
+      margin-bottom: 1em;
+    }
+    .checkbox-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>System Wspomagania Decyzji PSP Łańcut</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png" style="height: 100px; width: 90px;">
+  </header>
+  <a href="index.html" style="
+  display: inline-block;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #b30000;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+">
+  ← Powrót do strony głównej
+</a>
+<form id="kppForm">
+  <h2>Karta udzielanej kwalifikowanej pierwszej pomocy</h2>
+  <input type="text" id="rescuer" placeholder="Imię i nazwisko ratownika" required />
+  <input type="text" id="patient" placeholder="Imię i nazwisko poszkodowanego" required />
+  <select id="gender" required>
+    <option value="">Płeć</option>
+    <option value="Mężczyzna">Mężczyzna</option>
+    <option value="Kobieta">Kobieta</option>
+  </select>
+  <input type="number" id="age" placeholder="Wiek" required />
+  <input type="text" id="team" placeholder="Kryptonim zespołu ratowniczego" required />
+  <input type="time" id="arrival" required placeholder="Godzina przybycia" />
+  <input type="time" id="help" required placeholder="Godzina udzielenia pomocy" />
+  <input type="time" id="handover" required placeholder="Godzina przekazania" />
+  <input type="text" id="handoverTo" placeholder="Przekazano (np. ZRM)" required />
 
+  <div class="checkbox-group">
+    <label>Obrażenia/Objawy:</label>
+    <label><input type="checkbox" name="symptoms" value="Przytomny / Pod wpływem zdarzenia"> Przytomny / Pod wpływem zdarzenia</label>
+    <label><input type="checkbox" name="symptoms" value="Nieprzytomny"> Nieprzytomny</label>
+    <label><input type="checkbox" name="symptoms" value="Bezdech"> Bezdech</label>
+    <label><input type="checkbox" name="symptoms" value="Zatrzymanie krążenia"> Zatrzymanie krążenia</label>
+    <label><input type="checkbox" name="symptoms" value="Podtopienie"> Podtopienie</label>
+    <label><input type="checkbox" name="symptoms" value="Obrażenia głowy"> Obrażenia głowy</label>
+    <label><input type="checkbox" name="symptoms" value="Obrażenia kręgosłupa"> Obrażenia kręgosłupa / podejrzenie obrażeń</label>
+    <label><input type="checkbox" name="symptoms" value="Amputacja"> Amputacja</label>
+    <label><input type="checkbox" name="symptoms" value="Zmiażdżenie"> Zmiażdżenie</label>
+    <label><input type="checkbox" name="symptoms" value="Rany, krwotoki"> Rany, krwotoki</label>
+    <label><input type="checkbox" name="symptoms" value="Złamania"> Złamanie i podejrzenia złamań</label>
+    <label><input type="checkbox" name="symptoms" value="Zwichnięcia"> Zwichnięcia</label>
+    <label><input type="checkbox" name="symptoms" value="Oparzenia"> Oparzenia</label>
+    <label><input type="checkbox" name="symptoms" value="Zatrucie wziewne"> Zatrucie wziewne</label>
+    <label><input type="checkbox" name="symptoms" value="Duszność"> Duszność</label>
+    <label><input type="checkbox" name="symptoms" value="Wychłodzenie"> Wychłodzenie</label>
+    <label><input type="checkbox" name="symptoms" value="Wstrząs"> Wstrząs / zagrożenie wstrząsem</label>
+    <label><input type="checkbox" name="symptoms" value="Nudności"> Nudności / wymioty</label>
+    <label><input type="checkbox" name="symptoms" value="Skażenie"> Skażenie</label>
+  </div>
+
+  <div class="checkbox-group">
+    <label>Postępowanie:</label>
+    <label><input type="checkbox" name="actions" value="Wspomaganie psychiczne"> Wspomaganie psychiczne</label>
+    <label><input type="checkbox" name="actions" value="Pozycja: bezpieczna / zastana / na wznak"> Pozycja: bezpieczna / zastana / na wznak</label>
+    <label><input type="checkbox" name="actions" value="Udrożnienie: bezprzyrządowe / ssanie / rurka ustno-gardłowa / rurka krtaniowa"> Udrożnienie: bezprzyrządowe / ssanie / rurka ustno-gardłowa / rurka krtaniowa</label>
+    <label><input type="checkbox" name="actions" value="Oddech sztuczny: powietrze"> Oddech sztuczny: powietrze</label>
+    <label><input type="checkbox" name="actions" value="Uciskanie klatki piersiowej / defibrylacja"> Uciskanie klatki piersiowej / efekt / defibrylacja / efekt</label>
+    <label><input type="checkbox" name="actions" value="Stabilizacja / opatrunek osłaniający"> Stabilizacja / opatrunek osłaniający</label>
+    <label><input type="checkbox" name="actions" value="Stabilizacja głowy / nosze deska"> Stabilizacja głowy / nosze deska</label>
+    <label><input type="checkbox" name="actions" value="Opatrunek kikuta / zabezpieczenie amputowanych tkanek"> Opatrunek kikuta / zabezpieczenie amputowanych tkanek</label>
+    <label><input type="checkbox" name="actions" value="Unieruchomienie / termoizolacja"> Unieruchomienie / termoizolacja</label>
+    <label><input type="checkbox" name="actions" value="Opatrunek: osłaniający / uciskowy"> Opatrunek: osłaniający / uciskowy</label>
+  </div>
+
+  <select id="transport">
+    <option value="">Czy przekazano ZRM do transportu?</option>
+    <option value="Tak">Tak</option>
+    <option value="Nie">Nie</option>
+  </select>
+  <input type="text" id="signature" placeholder="Podpis ratownika" required />
+
+  <button type="submit">📤 Wyślij kartę KPP</button>
+</form>
+
+<script>
+  document.getElementById("kppForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const getChecked = (name) =>
+      Array.from(document.querySelectorAll(`input[name='${name}']:checked`))
+        .map(cb => cb.value)
+        .join(", ");
+
+    const payload = {
+      embeds: [
+        {
+          title: "⚕️ Otrzymano nową kartę udzielanej KPP",
+          color: 3447003, // niebieski
+          thumbnail: { url: "https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png" },
+          fields: [
+            { name: "```Imię i nazwisko ratownika```", value: document.getElementById("rescuer").value },
+            { name: "```Imię i nazwisko poszkodowanego```", value: document.getElementById("patient").value },
+            { name: "```Płeć```", value: document.getElementById("gender").value },
+            { name: "```Wiek```", value: document.getElementById("age").value },
+            { name: "```Kryptonim zespołu```", value: document.getElementById("team").value },
+            { name: "```Godziny```", value: `Przybycia: ${document.getElementById("arrival").value}, Pomocy: ${document.getElementById("help").value}, Przekazania: ${document.getElementById("handover").value}` },
+            { name: "```Przekazano```", value: document.getElementById("handoverTo").value },
+            { name: "```Obrażenia / Objawy```", value: getChecked("symptoms") || "Brak danych" },
+            { name: "```Postępowanie```", value: getChecked("actions") || "Brak danych" },
+            { name: "```ZRM do transportu?```", value: document.getElementById("transport").value },
+            { name: "```Podpis ratownika```", value: document.getElementById("signature").value }
+          ],
+          footer: { text: "Formularz SWD PSP Łańcut" }
+        }
+      ]
+    };
+
+    await fetch("https://discord.com/api/webhooks/1361014475255189730/qizJ_NC0hnbtyL-fl2yD86pge4o02gpda_usNq3Rpt36vnos9gkusATGYWk16y53NrVk", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    alert("Karta została przesłana.");
+    document.getElementById("kppForm").reset();
+  });
+</script>
+
+</body>
+</html>
