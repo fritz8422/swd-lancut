@@ -92,8 +92,8 @@
   <form id="tankowanie">
     <h2>Tankowanie</h2>
     <input name="Numer operacyjny pojazdu" placeholder="Numer operacyjny pojazdu" required />
-    <input name="Godzina Wyjazdu" placeholder="Godzina Wyjazdu" required />
-    <input name="Godzina Powrotu" placeholder="Godzina Powrotu" required />
+    <input name="Godzina Wyjazdu" type="time" required />
+    <input name="Godzina Powrotu" type="time" required />
     <input name="Cel wyjazdu" placeholder="Cel wyjazdu" required />
     <input name="Ilość zatankowanych Litrów" placeholder="Ilość zatankowanych Litrów" required />
     <input name="Koszt" placeholder="Koszt" required />
@@ -112,48 +112,64 @@
   </form>
 
   <!-- Faktury inne -->
-  <form id="faktury">
-    <h2>Faktury inne</h2>
-    <input name="Data" placeholder="Data" required />
-    <input name="Numer operacyjny wozu" placeholder="Numer operacyjny wozu" required />
-    <input name="Godzina wyjazdu" placeholder="Godzina wyjazdu" required />
-    <input name="Godzina powrotu" placeholder="Godzina powrotu" required />
-    <textarea name="Produkty" placeholder="Produkt/y kupny/e" required></textarea>
-    <input name="Cena" placeholder="Cena produktu kupnego" required />
-    <input name="Sklep" placeholder="Sklep" required />
-    <input name="Podpis" placeholder="Podpis (stopień, imię nazwisko)" required />
-    <button type="submit">Wyślij</button>
-  </form>
+<form id="faktury">
+  <h2>Faktury - inne</h2>
+  <input name="Data" type="date" required />
+  <input name="Numer operacyjny wozu" placeholder="Numer operacyjny wozu" required />
+  <input name="Godzina wyjazdu" type="time" required />
+  <input name="Godzina powrotu" type="time" required />
+  <textarea name="Produkty" placeholder="Produkt/y objęte zakupem" required></textarea>
+  <input name="Cena" placeholder="Ceny zakupionych produktów" required />
+  <input name="Sklep" placeholder="Podmiot sprzedający" required />
+  <input name="Podpis" placeholder="Podpis (stopień, imię nazwisko)" required />
+  <label>Załącznik (opcjonalnie):</label>
+  <input type="file" name="Zdjęcie" accept="image/*" />
 
-  <script>
-    const webhook = "https://discord.com/api/webhooks/1361236876442341476/p1tzZFERgA7aEpUMJgUOpL5-GtVz_XyjzyrEDUqnFoKjfSmEYmTb8iY3omSWnielsG5c";
-  
-    document.querySelectorAll("form").forEach(form => {
-      form.addEventListener("submit", async e => {
-        e.preventDefault();
-  
-        const data = new FormData(form);
-        const fields = [...data.entries()].map(([key, value]) => ({ name: key, value }));
-  
-        const embed = {
-          title: form.querySelector("h2").innerText,
-          color: 0xFF0000,
-          thumbnail: { url: "https://sbihp.pl/wp-content/uploads/2022/04/Panstwowa-Straz-Pozarna.png" },
-          fields: fields.map(f => ({ name: f.name, value: f.value || "brak", inline: false })),
-          timestamp: new Date().toISOString()
-        };
-  
-        await fetch(webhook, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ embeds: [embed] })
-        });
-  
-        alert("Wysłano pomyślnie!");
-        form.reset();
+</form>
+
+ <script>
+  const webhook = "https://discord.com/api/webhooks/1361236876442341476/p1tzZFERgA7aEpUMJgUOpL5-GtVz_XyjzyrEDUqnFoKjfSmEYmTb8iY3omSWnielsG5c";
+
+  document.querySelectorAll("form").forEach(form => {
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const fields = [];
+
+      let file = null;
+
+      for (const [key, value] of formData.entries()) {
+        if (value instanceof File && value.name && key === "Zdjęcie") {
+          file = value;
+        } else {
+          fields.push({ name: key, value: value || "brak", inline: false });
+        }
+      }
+
+      const embed = {
+        title: form.querySelector("h2").innerText,
+        color: 0xFF0000,
+        thumbnail: file ? { url: `attachment://${file.name}` } : { url: "https://sbihp.pl/wp-content/uploads/2022/04/Panstwowa-Straz-Pozarna.png" },
+        fields,
+        timestamp: new Date().toISOString()
+      };
+
+      const payload = new FormData();
+      payload.append("payload_json", JSON.stringify({ embeds: [embed] }));
+      if (file) payload.append("files[0]", file, file.name);
+
+      await fetch(webhook, {
+        method: "POST",
+        body: payload
       });
+
+      alert("Wysłano pomyślnie!");
+      form.reset();
     });
-  </script>
+  });
+</script>
+
   
 </body>
 </html>
