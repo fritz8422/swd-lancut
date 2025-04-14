@@ -128,16 +128,21 @@
 
 </form>
 
- <script>
-  const webhook = "https://discord.com/api/webhooks/1361236876442341476/p1tzZFERgA7aEpUMJgUOpL5-GtVz_XyjzyrEDUqnFoKjfSmEYmTb8iY3omSWnielsG5c";
+<script>
+  const webhooks = {
+    tankowanie: "https://discord.com/api/webhooks/1361298329459363851/W3eqfpoM8F-rktouDGVpkwXN1sB4LmDG6hwQ0N1RKLXjfGpQwXUgeBXcrpqcQl8yStsC",
+    butle: "https://discord.com/api/webhooks/1361236876442341476/p1tzZFERgA7aEpUMJgUOpL5-GtVz_XyjzyrEDUqnFoKjfSmEYmTb8iY3omSWnielsG5c",
+    faktury: "https://discord.com/api/webhooks/1361298148835856495/NmieQK_hZXMdHdSuYWepzMI6QLBBnQO_HVx62-AgFAZ9NQaPzD9z2BqNyHIraAOK999I"
+  };
 
   document.querySelectorAll("form").forEach(form => {
     form.addEventListener("submit", async e => {
       e.preventDefault();
 
+      const formId = form.id;
+      const webhook = webhooks[formId];
       const formData = new FormData(form);
       const fields = [];
-
       let file = null;
 
       for (const [key, value] of formData.entries()) {
@@ -170,6 +175,7 @@
     });
   });
 </script>
+
 
   
 </body>
