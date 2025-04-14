@@ -22,7 +22,7 @@
     }
     input, select, textarea {
       width: 100%;
-      padding: 0.7em;
+      padding: 10px;
       margin-bottom: 1em;
       border-radius: 5px;
       border: 1px solid #ccc;
@@ -42,13 +42,38 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    header {
+      background-color: #b30000;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.checkbox-grid label {
+  display: flex;
+  align-items: center;
+  background: #f7f7f7;
+  padding: 10px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  font-size: 13px;
+}
   </style>
 </head>
 <body>
-  <header>
+  <header style="text-align: center;">
     <h1>System Wspomagania Decyzji PSP Łańcut</h1>
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Logo-psp.png" style="height: 100px; width: 90px;">
   </header>
+
+<form id="kppForm">
   <a href="index.html" style="
   display: inline-block;
   margin-bottom: 20px;
@@ -63,7 +88,6 @@
 ">
   ← Powrót do strony głównej
 </a>
-<form id="kppForm">
   <h2>Karta udzielanej kwalifikowanej pierwszej pomocy</h2>
   <input type="text" id="rescuer" placeholder="Imię i nazwisko ratownika" required />
   <input type="text" id="patient" placeholder="Imię i nazwisko poszkodowanego" required />
@@ -74,48 +98,60 @@
   </select>
   <input type="number" id="age" placeholder="Wiek" required />
   <input type="text" id="team" placeholder="Kryptonim zespołu ratowniczego" required />
+  <label>Godzina przybycia na miejsce</label>
   <input type="time" id="arrival" required placeholder="Godzina przybycia" />
+  <label>Godzina podjęcia działań/lokalizacji medycznej</label>
   <input type="time" id="help" required placeholder="Godzina udzielenia pomocy" />
+  <label>Godzina zakończenia działań/przekazania ZRM</label>
   <input type="time" id="handover" required placeholder="Godzina przekazania" />
-  <input type="text" id="handoverTo" placeholder="Przekazano (np. ZRM)" required />
+  <input type="text" id="handoverTo" placeholder="Przekazano (np. ZRM, Lotnicze Pogotowie)" required />
 
   <div class="checkbox-group">
-    <label>Obrażenia/Objawy:</label>
-    <label><input type="checkbox" name="symptoms" value="Przytomny / Pod wpływem zdarzenia"> Przytomny / Pod wpływem zdarzenia</label>
-    <label><input type="checkbox" name="symptoms" value="Nieprzytomny"> Nieprzytomny</label>
-    <label><input type="checkbox" name="symptoms" value="Bezdech"> Bezdech</label>
-    <label><input type="checkbox" name="symptoms" value="Zatrzymanie krążenia"> Zatrzymanie krążenia</label>
-    <label><input type="checkbox" name="symptoms" value="Podtopienie"> Podtopienie</label>
-    <label><input type="checkbox" name="symptoms" value="Obrażenia głowy"> Obrażenia głowy</label>
-    <label><input type="checkbox" name="symptoms" value="Obrażenia kręgosłupa"> Obrażenia kręgosłupa / podejrzenie obrażeń</label>
-    <label><input type="checkbox" name="symptoms" value="Amputacja"> Amputacja</label>
-    <label><input type="checkbox" name="symptoms" value="Zmiażdżenie"> Zmiażdżenie</label>
-    <label><input type="checkbox" name="symptoms" value="Rany, krwotoki"> Rany, krwotoki</label>
-    <label><input type="checkbox" name="symptoms" value="Złamania"> Złamanie i podejrzenia złamań</label>
-    <label><input type="checkbox" name="symptoms" value="Zwichnięcia"> Zwichnięcia</label>
-    <label><input type="checkbox" name="symptoms" value="Oparzenia"> Oparzenia</label>
-    <label><input type="checkbox" name="symptoms" value="Zatrucie wziewne"> Zatrucie wziewne</label>
-    <label><input type="checkbox" name="symptoms" value="Duszność"> Duszność</label>
-    <label><input type="checkbox" name="symptoms" value="Wychłodzenie"> Wychłodzenie</label>
-    <label><input type="checkbox" name="symptoms" value="Wstrząs"> Wstrząs / zagrożenie wstrząsem</label>
-    <label><input type="checkbox" name="symptoms" value="Nudności"> Nudności / wymioty</label>
-    <label><input type="checkbox" name="symptoms" value="Skażenie"> Skażenie</label>
+    <h3>Obrażenia/Objawy:</h3>
+    <div class="checkbox-grid">
+      <label><input type="checkbox" name="symptoms" value="Przytomny / Pod wpływem zdarzenia"> Przytomny / Pod wpływem zdarzenia</label>
+      <label><input type="checkbox" name="symptoms" value="Nieprzytomny"> Nieprzytomny</label>
+      <label><input type="checkbox" name="symptoms" value="Bezdech"> Bezdech</label>
+      <label><input type="checkbox" name="symptoms" value="Zatrzymanie krążenia"> Zatrzymanie krążenia</label>
+      <label><input type="checkbox" name="symptoms" value="Podtopienie"> Podtopienie</label>
+      <label><input type="checkbox" name="symptoms" value="Obrażenia głowy"> Obrażenia głowy</label>
+      <label><input type="checkbox" name="symptoms" value="Obrażenia kręgosłupa"> Obrażenia kręgosłupa / podejrzenie obrażeń</label>
+      <label><input type="checkbox" name="symptoms" value="Amputacja"> Amputacja</label>
+      <label><input type="checkbox" name="symptoms" value="Zmiażdżenie"> Zmiażdżenie</label>
+      <label><input type="checkbox" name="symptoms" value="Rany, krwotoki"> Rany, krwotoki</label>
+      <label><input type="checkbox" name="symptoms" value="Złamania"> Złamanie i podejrzenia złamań</label>
+      <label><input type="checkbox" name="symptoms" value="Zwichnięcia"> Zwichnięcia</label>
+      <label><input type="checkbox" name="symptoms" value="Oparzenia"> Oparzenia</label>
+      <label><input type="checkbox" name="symptoms" value="Zatrucie wziewne"> Zatrucie wziewne</label>
+      <label><input type="checkbox" name="symptoms" value="Duszność"> Duszność</label>
+      <label><input type="checkbox" name="symptoms" value="Wychłodzenie"> Wychłodzenie</label>
+      <label><input type="checkbox" name="symptoms" value="Wstrząs"> Wstrząs / zagrożenie wstrząsem</label>
+      <label><input type="checkbox" name="symptoms" value="Nudności"> Nudności / wymioty</label>
+      <label><input type="checkbox" name="symptoms" value="Skażenie"> Skażenie</label>
+    </div>
   </div>
-
+  
   <div class="checkbox-group">
-    <label>Postępowanie:</label>
-    <label><input type="checkbox" name="actions" value="Wspomaganie psychiczne"> Wspomaganie psychiczne</label>
-    <label><input type="checkbox" name="actions" value="Pozycja: bezpieczna / zastana / na wznak"> Pozycja: bezpieczna / zastana / na wznak</label>
-    <label><input type="checkbox" name="actions" value="Udrożnienie: bezprzyrządowe / ssanie / rurka ustno-gardłowa / rurka krtaniowa"> Udrożnienie: bezprzyrządowe / ssanie / rurka ustno-gardłowa / rurka krtaniowa</label>
-    <label><input type="checkbox" name="actions" value="Oddech sztuczny: powietrze"> Oddech sztuczny: powietrze</label>
-    <label><input type="checkbox" name="actions" value="Uciskanie klatki piersiowej / defibrylacja"> Uciskanie klatki piersiowej / efekt / defibrylacja / efekt</label>
-    <label><input type="checkbox" name="actions" value="Stabilizacja / opatrunek osłaniający"> Stabilizacja / opatrunek osłaniający</label>
-    <label><input type="checkbox" name="actions" value="Stabilizacja głowy / nosze deska"> Stabilizacja głowy / nosze deska</label>
-    <label><input type="checkbox" name="actions" value="Opatrunek kikuta / zabezpieczenie amputowanych tkanek"> Opatrunek kikuta / zabezpieczenie amputowanych tkanek</label>
-    <label><input type="checkbox" name="actions" value="Unieruchomienie / termoizolacja"> Unieruchomienie / termoizolacja</label>
-    <label><input type="checkbox" name="actions" value="Opatrunek: osłaniający / uciskowy"> Opatrunek: osłaniający / uciskowy</label>
+    <h3>Postępowanie:</h3>
+    <div class="checkbox-grid">
+      <label><input type="checkbox" name="actions" value="Wspomaganie psychiczne"> Wspomaganie psychiczne</label>
+      <label><input type="checkbox" name="actions" value="Pozycja: bezpieczna / zastana / na wznak"> Pozycja: zastana</label>
+      <label><input type="checkbox" name="actions" value="Pozycja: bezpieczna / zastana / na wznak"> Pozycja: na wznak</label>
+      <label><input type="checkbox" name="actions" value="Pozycja: bezpieczna / zastana / na wznak"> Pozycja bezpieczna</label>
+      <label><input type="checkbox" name="actions" value="Udrożnienie:"> Udrożnienie: bezprzyrządowe</label>
+      <label><input type="checkbox" name="actions" value="Udrożnienie:"> Udrożnienie: ssanie</label>
+      <label><input type="checkbox" name="actions" value="Udrożnienie:"> Udrożnienie: rurka ustno-gardłowa</label>
+      <label><input type="checkbox" name="actions" value="Oddech sztuczny: powietrze"> Oddech sztuczny: powietrze</label>
+      <label><input type="checkbox" name="actions" value="Uciskanie klatki piersiowej / defibrylacja"> Uciskanie klatki piersiowej / defibrylacja </label>
+      <label><input type="checkbox" name="actions" value="Stabilizacja / opatrunek osłaniający"> Stabilizacja / opatrunek osłaniający</label>
+      <label><input type="checkbox" name="actions" value="Stabilizacja głowy / nosze deska"> Stabilizacja głowy / nosze deska</label>
+      <label><input type="checkbox" name="actions" value="Opatrunek kikuta"> Opatrunek kikuta / zabezpieczenie amputowanych tkanek</label>
+      <label><input type="checkbox" name="actions" value="Zabezpieczenie amputowanych tkanek"> Zabezpieczenie amputowanych tkanek</label>
+      <label><input type="checkbox" name="actions" value="Unieruchomienie i termoizolacja"> Unieruchomienie i termoizolacja</label>
+      <label><input type="checkbox" name="actions" value="Opatrunek: osłaniający lub uciskowy"> Opatrunek: osłaniający lub uciskowy</label>
+    </div>
   </div>
-
+  
   <select id="transport">
     <option value="">Czy przekazano ZRM do transportu?</option>
     <option value="Tak">Tak</option>
@@ -123,7 +159,7 @@
   </select>
   <input type="text" id="signature" placeholder="Podpis ratownika" required />
 
-  <button type="submit">📤 Wyślij kartę KPP</button>
+  <button type="submit">Zapisz i  prześlij kartę KPP</button>
 </form>
 
 <script>
