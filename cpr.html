@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Informatyczny CPR</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #c62828;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .checkbox-item {
+      display:block;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+    .checkbox-item label {
+      margin: 0;
+      font-weight: normal;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #c62828;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>System Informatyczny CPR</h1>
+    <form id="cprForm">
+      <label for="location">Miejsce zdarzenia</label>
+      <input type="text" id="location" placeholder="Dokładny adres zdarzenia..." required>
+
+      <label for="incident">Rodzaj zdarzenia</label>
+      <textarea id="incident" rows="3" placeholder="Czego dotyczy zdarzenie? Ewentualna ilość poszkodowanych..."></textarea>
+
+      <label for="reporter">Dane osoby zgłaszającej</label>
+      <input type="text" id="reporter" placeholder="Imię i nazwisko..." required>
+
+      <label>Służba wiodąca</label>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" id="psp" name="leadingService" value="Państwowa Straż Pożarna">
+          <label for="psp">Państwowa Straż Pożarna</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="zrm" name="leadingService" value="ZRM/PRM">
+          <label for="zrm">ZRM/PRM</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="policja" name="leadingService" value="Policja">
+          <label for="policja">Policja</label>
+        </div>
+      </div>
+
+      <button type="submit">Wyślij zgłoszenie</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById("cprForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const location = document.getElementById("location").value;
+      const incident = document.getElementById("incident").value;
+      const reporter = document.getElementById("reporter").value;
+      const services = [...document.querySelectorAll('input[name="leadingService"]:checked')].map(el => el.value).join(", ");
+
+      const webhookUrl = "https://discord.com/api/webhooks/1268905045332725871/hWNovhHa889fzDQoesZtUefKIEkR3g3J9kJMhYvKS5Nce0eYOilQgeTTCDX1rg0353ZW";
+
+      const payload = {
+  content: "<@&1259598362228031684> <@&1268912371208949800>",
+  allowed_mentions: {
+    parse: ["roles"]
+  },
+  embeds: [
+    {
+      title: "📟 Przekierowano formularz zdarzenia **SI CPR -> SWD-ST**",
+      color: 3447003,
+      thumbnail: {
+        url: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Logo_Systemu_Powiadamiania_Ratunkowego.png"
+      },
+      fields: [
+        {
+          name: "```MIEJSCE ZDARZENIA```",
+          value: location
+        },
+        {
+          name: "```RODZAJ ZDARZENIA```",
+          value: incident
+        },
+        {
+          name: "```DANE OSOBY ZGŁASZAJĄCEJ```",
+          value: reporter
+        },
+        {
+          name: "```SŁUŻBA WIODĄCA```",
+          value: services || "Nie podano"
+        }
+      ],
+      timestamp: new Date()
+    }
+  ]
+};
+
+      
+
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      alert("Zgłoszenie zostało wysłane.");
+      document.getElementById("cprForm").reset();
+    });
+  </script>
+</body>
+</html>
