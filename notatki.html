@@ -92,61 +92,77 @@
 ">
   ← Powrót do strony głównej
 </a>
-<div style="text-align: center;">
-  <textarea id="controller-notes" rows="5" style="width: 94%; padding: 20px; border-radius: 5px; border: 1px solid #ccc;" placeholder="Miejsce na notatki..."></textarea>
+
+<div class="container">
+  <h2>Meldunek Ewid-ST</h2>
+
+  <label for="meldunekZdarzenie">Zdarzenie:</label>
+  <input type="text" id="meldunekZdarzenie" placeholder="Np. Pożar stodoły w Kornowacu">
+
+  <label for="meldunekTresc">Treść meldunku:</label>
+  <textarea id="meldunekTresc" rows="4" placeholder="Opisz sytuację..."></textarea>
+
+  <button onclick="wyslijMeldunekEwid()">Wyślij Meldunek Ewid-ST</button>
 </div>
-  <div class="container">
-    <h2>Meldunek z wyjazdu zastępu</h2>
-    <label for="zastepy">Zastęp:</label>
-    <select name="zastepy" id="zastepy">
-      <option value="RF 491-21">RF 491-21</option>
-      <option value="RF 491-22">RF 491-22</option>
-      <option value="RF 491-25">RF 491-25</option>
-      <option value="RF 491-50">RF 491-50</option>
-      <option value="RF 491-53">RF 491-53</option>
-      <option value="RF 491-90">RF 491-90</option>
-      <option value="RF 490-90">RF 490-90</option>
-      <option value="RF 490-91">RF 490-91</option>
-      <option value="RF 490-92">RF 490-92</option>
-      <option value="other">WPROWADŹ WŁASNY</option>
-    </select>
-    <label for="customZastep">Wprowadź własny zastęp:</label>
-    <input type="text" id="customZastep" placeholder="Wprowadź zastęp">
 
-    <label>Godzina wyjazdu:</label>
-    <input type="time" id="wyjazd">
+<div class="container">
+  <h2>Zarejestruj czas w karcie manipulacyjnej</h2>
 
-    <label>Godzina dojazdu:</label>
-    <input type="time" id="dojazd">
+  <label for="zastepy">Zastęp:</label>
+  <select name="zastepy" id="zastepy">
+    <option value="RF 491-21">RF 491-21</option>
+    <option value="RF 491-22">RF 491-22</option>
+    <option value="RF 491-25">RF 491-25</option>
+    <option value="RF 491-50">RF 491-50</option>
+    <option value="RF 491-53">RF 491-53</option>
+    <option value="RF 491-90">RF 491-90</option>
+    <option value="RF 490-90">RF 490-90</option>
+    <option value="RF 490-91">RF 490-91</option>
+    <option value="RF 490-92">RF 490-92</option>
+    <option value="other">WPROWADŹ WŁASNY</option>
+  </select>
 
-    <label>Zakończenie działań:</label>
-    <input type="time" id="zakonczenie">
+  <label for="customZastep">Wprowadź własny zastęp:</label>
+  <input type="text" id="customZastep" placeholder="Wprowadź zastęp">
 
-    <label>Powrót do jednostki:</label>
-    <input type="time" id="powrot">
+  <label for="typMeldunku">Typ rejestrowanego zdarzenia:</label>
+  <select id="typMeldunku" required>
+    <option value="">-- Wybierz typ zdarzenia --</option>
+    <option value="Pożar – prowadzony (PP) - WYJAZD ZASTĘPU">Pożar – prowadzony (PP) - WYJAZD ZASTĘPU</option>
+    <option value="Pożar – opanowany (OP) -  CZAS LOKALIZACJI">Pożar – opanowany (OP) -  CZAS LOKALIZACJI</option>
+    <option value="Pożar – zakończony (KP) - ZAKOŃCZENIE DZIAŁAŃ">Pożar – zakończony (KP) - ZAKOŃCZENIE DZIAŁAŃ</option>
+    <option value="MZ – prowadzone (PM) - WYJAZD ZASTĘPU">MZ – prowadzone (PM) - WYJAZD ZASTĘPU</option>
+    <option value="MZ – opanowane (OM) -  CZAS LOKALIZACJI">MZ – opanowane (OM) -  CZAS LOKALIZACJI</option>
+    <option value="MZ – zakończone (KM) - ZAKOŃCZENIE DZIAŁAŃ">MZ – zakończone (KM) - ZAKOŃCZENIE DZIAŁAŃ</option>
+    <option value="CW – ćwiczenia (CW) - WYJAZD ZASTĘPU">CW – ćwiczenia (CW) - WYJAZD ZASTĘPU</option>
+    <option value="CZ – ćwiczenia zakończone (CZ) - ZAKOŃCZENIE DZIAŁAŃ">CZ – ćwiczenia zakończone (CZ) - ZAKOŃCZENIE DZIAŁAŃ</option>
+  </select>
+  <label for="godzina">Godzina:</label>
+  <input type="time" id="godzina">
 
-    <label>Uwagi do meldunku:</label>
-    <textarea id="notatka" rows="4" placeholder="Krótki opis interwencji..."></textarea>
+  <label for="dotyczy">Dotyczy interwencji:</label>
+  <textarea id="dotyczy" rows="3" placeholder="Opis identyfikacyjny interwencji..."></textarea>
 
-    <button onclick="wyslijNotatke()">Prześlij meldunek</button>
+  <button onclick="wyslijGodzine()">Prześlij godzinę</button>
+</div>
 
     <hr>
 
-    <h2>Ewidencja wyjazdów i relokacji SiŚ</h2>
+    <h2>Rejestr wyjazdów</h2>
 
-    <label>Rodzaj wyjazdu:</label>
+    <label>Rodzaj zdarzenia:</label>
     <select id="typWyjazdu">
       <option value="CW- Ćwiczenia podmiotów KSRG w tym PSP">CW – Ćwiczenia</option>
-      <option value="WG - wyjazd gospodarczy; SIŚ JRG PSP">WG – Wyjazd gospodarczy dot. SiŚ JRG PSP</option>
+      <option value="WG - wyjazd gospodarczy (SIŚ JRG PSP)">WG – Wyjazd gospodarczy dot. SiŚ JRG PSP</option>
       <option value="WG - wyjazd gospodarczy; OSP KSRG">WG – Wyjazd gospodarczy dot. SiŚ OSP KSRG</option>
       <option value="WG - wyjazd gospodarczy">WG – Wyjazd gospodarczy</option>
       <option value="WG - wyjazd gospodarczy TANKOWANIE">WG – Wyjazd gospodarczy TANKOWANIE</option>
+      <option value="WG - wyjazd gospodarczy/administracyjny; dot. pojazdów oper. KP PSP">WG – Wyjazd gospodarczy administracyjny (dotyczny wyłącznie pojazdów operacyjnych KP PSP)</option>
       <option value="PZR - Przekazanie na zabezpieczenie operacyjne rejonu">PZR – Przekazanie na zabezpieczenie operacyjne rejonu</option>
+      <option value="KZR - Koniez zabezpieczenia rejonu">KZR - Koniez zabezpieczenia rejonu</option>
       <option value="MZ/L – Zabezpieczenie imprezy masowej">MZ/L – Zabezpieczenie imprezy masowej</option>
       <option value="MZ/L – Zabezpieczenie prac pożarowo niebezpiecznych">MZ/L – Zabezpieczenie prac pożarowo niebezpiecznych</option>
-      <option value="WG - wyjazd gospodarczy/administracyjny; dot. pojazdów oper. KP PSP">WG – Wyjazd gospodarczy administracyjny (dotyczny wyłącznie pojazdów operacyjnych KP PSP)</option>
-      <option value="P/GO - Wyjazd grupy operacyjnej">Pożar - Wyjazd grupy operacyjnej (dotyczny wyłącznie pojazdów operacyjnych KP PSP)</option>
-      <option value="MZ/GO - Wyjazd grupy operacyjnej">MZ - Wyjazd grupy operacyjnej (dotyczny wyłącznie pojazdów operacyjnych KP PSP)</option>
+      <option value="GRUPA OPERACYJNA - Wyjazd grupy operacyjnej">GRUPA OPERACYJNA - Wyjazd grupy operacyjnej (dotyczny wyłącznie pojazdów operacyjnych PSP)</option>
     </select>
 
     <label>Zastęp:</label>
@@ -165,34 +181,81 @@
     <label for="customZastepRejestr">Wprowadź własny zastęp:</label>
     <input type="text" id="customZastepRejestr" placeholder="Wprowadź zastęp">
 
-    <label>Opis wyjazdu:</label>
-    <textarea id="opisRejestr" rows="3" placeholder="Opisz cel wyjazdu..."></textarea>
+    <label>Informacje dodatkowe - opis zdarzenia</label>
+    <textarea id="opisRejestr" rows="3" placeholder="Opis zdarzenia..."></textarea>
 
     <button onclick="wyslijRejestr()">Zapisz meldunek w rejestrze</button>
   </div>
 
   <script>
+ async function wyslijMeldunekEwid() {
+    const zdarzenie = document.getElementById("meldunekZdarzenie").value.trim();
+    const tresc = document.getElementById("meldunekTresc").value.trim();
+    const czas = new Date().toLocaleTimeString("pl-PL", { hour: '2-digit', minute: '2-digit' });
+
+    if (!zdarzenie || !tresc) {
+      alert("Uzupełnij oba pola!");
+      return;
+    }
+
+    const webhookURL = "https://discord.com/api/webhooks/1361014475255189730/qizJ_NC0hnbtyL-fl2yD86pge4o02gpda_usNq3Rpt36vnos9gkusATGYWk16y53NrVk";
+
+    const payload = {
+      embeds: [
+        {
+          title: `📝 Meldunek dyżurnego Ewid-ST`,
+          color: 16711680, // czerwony
+          fields: [
+            { name: "Zdarzenie", value: zdarzenie },
+            { name: "Treść meldunku", value: tresc },
+            { name: "Czas wysłania", value: czas }
+          ],
+          footer: {
+            text: "System SWD-ST • Automatyczny meldunek"
+          },
+          timestamp: new Date().toISOString()
+        }
+      ]
+    };
+
+    try {
+      await fetch(webhookURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      alert("Meldunek wysłany!");
+      document.getElementById("meldunekZdarzenie").value = "";
+      document.getElementById("meldunekTresc").value = "";
+
+    } catch (error) {
+      alert("Błąd przy wysyłaniu meldunku!");
+      console.error(error);
+    }
+  }
+
     const webhookURL = "https://discord.com/api/webhooks/1361026081334755428/jN0OJtmzo0j0tCnJV9BbJ4BDDq7NqRuhiclCmKHqFXuvFcpVNUsXwv_2KXcTX_mZc71U";
 
-    function wyslijNotatke() {
-  const zastep = document.getElementById("zastepy").value === "other" ? document.getElementById("customZastep").value : document.getElementById("zastepy").value;
-  const wyjazd = document.getElementById("wyjazd").value;
-  const dojazd = document.getElementById("dojazd").value;
-  const zakonczenie = document.getElementById("zakonczenie").value;
-  const powrot = document.getElementById("powrot").value;
-  const notatka = document.getElementById("notatka").value;
+function wyslijGodzine() {
+  const zastep = document.getElementById("zastepy").value === "other"
+    ? document.getElementById("customZastep").value
+    : document.getElementById("zastepy").value;
+  const godzina = document.getElementById("godzina").value;
+  const dotyczy = document.getElementById("dotyczy").value;
+  const typmeldunku = document.getElementById("typMeldunku").value;
 
   const data = {
     embeds: [{
-      title: "📝 Nowy meldunek w terminalu: Przesłano godziny interwencji",
-      color: 15158332,
+      title: "📟 Karta manipulacyjna: Zarejestrowano nowy meldunek ",
+      color: 3447003,
       fields: [
         { name: "Zastęp", value: zastep || "-", inline: true },
-        { name: "Wyjazd", value: wyjazd || "-", inline: true },
-        { name: "Dojazd", value: dojazd || "-", inline: true },
-        { name: "Zakończenie", value: zakonczenie || "-", inline: true },
-        { name: "Powrót", value: powrot || "-", inline: true },
-        { name: "Notatka", value: notatka || "-", inline: false }
+        { name: "Czas zameldowania", value: godzina || "-", inline: false },
+        { name: "Typ zdarzenia", value: typmeldunku || "-", inline: false },
+        { name: "Dotyczy interwencji", value: dotyczy || "-", inline: false }
       ],
       timestamp: new Date().toISOString()
     }]
@@ -204,7 +267,7 @@
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
-  }).then(() => alert("Notatka wysłana!"));
+  }).then(() => alert("Godzina interwencji została przesłana!"));
 }
 
 function wyslijRejestr() {
@@ -217,9 +280,9 @@ function wyslijRejestr() {
       title: "📘 Wprowadzono nowy wpis w rejestrze wyjazdów",
       color: 3447003,
       fields: [
-        { name: "Typ wyjazdu", value: typ, inline: true },
-        { name: "Zastęp", value: zastep || "-", inline: true },
-        { name: "Opis", value: opis || "-", inline: false }
+        { name: "Typ rejestrowanego zdarzenia", value: typ, inline: false },
+        { name: "Zastęp", value: zastep || "-", inline: false },
+        { name: "Informacje dodatkowe", value: opis || "-", inline: false }
       ],
       timestamp: new Date().toISOString()
     }]
