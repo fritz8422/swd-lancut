@@ -94,10 +94,10 @@
 </a>
 
 <div class="container">
-  <h2>Meldunek Ewid-ST</h2>
+  <h2>Meldunek EWID-ST</h2>
 
   <label for="meldunekZdarzenie">Zdarzenie:</label>
-  <input type="text" id="meldunekZdarzenie" placeholder="Np. Pożar stodoły w Kornowacu">
+  <input type="text" id="meldunekZdarzenie" placeholder="Np. Żołynia ul. Wiejska 4, pożar Traw">
 
   <label for="meldunekTresc">Treść meldunku:</label>
   <textarea id="meldunekTresc" rows="4" placeholder="Opisz sytuację..."></textarea>
@@ -106,7 +106,7 @@
 </div>
 
 <div class="container">
-  <h2>Zarejestruj czas w karcie manipulacyjnej</h2>
+  <h2>Wpis do karty manipulacyjnej</h2>
 
   <label for="zastepy">Zastęp:</label>
   <select name="zastepy" id="zastepy">
@@ -157,13 +157,13 @@
       <option value="WG - wyjazd gospodarczy (SIŚ JRG PSP)">WG – Wyjazd gospodarczy dot. SiŚ JRG PSP</option>
       <option value="WG - wyjazd gospodarczy (OSP, KSRG)">WG – Wyjazd gospodarczy dot. SiŚ OSP KSRG</option>
       <option value="WG - wyjazd gospodarczy TANKOWANIE">WG – Wyjazd gospodarczy TANKOWANIE</option>
-      <option value="WG - wyjazd gospodarczy administracyjny (Operacyjne)">WG – Wyjazd gospodarczy administracyjny (dotyczny wyłącznie pojazdów operacyjnych)</option>
+      <option value="WG - wyjazd gospodarczy administracyjny (Operacyjne)">WG – Wyjazd gospodarczy administracyjny (dotyczny pojazdów operacyjnych)</option>
       <option value="KWG – Koniec wyjazdu gospodarczego">KWG – Koniec wyjazdu gospodarczego</option>
       <option value="PZR - Przekazanie na zabezpieczenie operacyjne rejonu">PZR – Przekazanie na zabezpieczenie operacyjne rejonu</option>
       <option value="KZR - Koniec zabezpieczenia rejonu">KZR - Koniec zabezpieczenia rejonu</option>
       <option value="MZ/L – Zabezpieczenie imprezy masowej">MZ/L – Zabezpieczenie imprezy masowej</option>
       <option value="MZ/L – Zabezpieczenie prac pożarowo niebezpiecznych">MZ/L – Zabezpieczenie prac pożarowo niebezpiecznych</option>
-      <option value="GRUPA OPERACYJNA - Wyjazd grupy operacyjnej">GRUPA OPERACYJNA - Wyjazd grupy operacyjnej (dotyczny wyłącznie pojazdów operacyjnych PSP)</option>
+      <option value="GRUPA OPERACYJNA - Wyjazd grupy operacyjnej">GRUPA OPERACYJNA - Wyjazd grupy operacyjnej (dotyczny pojazdów operacyjnych PSP)</option>
     </select>
 
     <label>Zastęp:</label>
@@ -205,7 +205,7 @@ async function wyslijMeldunekEwid() {
     content: "📢 **Nowy meldunek EWID-ST przesłany przez dyżurnego**",
     embeds: [
       {
-        title: `📝 Meldunek Ewid-ST`,
+        title: `📝 Meldunek EWID-ST`,
         color: 65280, // zielony
         thumbnail: {
           url: "https://images-ext-1.discordapp.net/external/llcpafYeO4D4ksPaR4OfOpoWLGr8ukkPJgz3cJbJeco/https/sbihp.pl/wp-content/uploads/2022/04/Panstwowa-Straz-Pozarna.png?format=webp&quality=lossless"
@@ -255,7 +255,7 @@ function wyslijGodzine() {
 
   const data = {
     embeds: [{
-      title: "📟 Karta manipulacyjna: Zarejestrowano nowy meldunek ",
+      title: "📟 Karta manipulacyjna: Zarejestrowano nowy wpis ",
       color: 3447003,
       fields: [
         { name: "Zastęp", value: zastep || "-", inline: true },
