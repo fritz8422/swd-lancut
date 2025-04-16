@@ -189,54 +189,59 @@
   </div>
 
   <script>
- async function wyslijMeldunekEwid() {
-    const zdarzenie = document.getElementById("meldunekZdarzenie").value.trim();
-    const tresc = document.getElementById("meldunekTresc").value.trim();
-    const czas = new Date().toLocaleTimeString("pl-PL", { hour: '2-digit', minute: '2-digit' });
+async function wyslijMeldunekEwid() {
+  const zdarzenie = document.getElementById("meldunekZdarzenie").value.trim();
+  const tresc = document.getElementById("meldunekTresc").value.trim();
+  const czas = new Date().toLocaleTimeString("pl-PL", { hour: '2-digit', minute: '2-digit' });
 
-    if (!zdarzenie || !tresc) {
-      alert("Uzupełnij oba pola!");
-      return;
-    }
-
-    const webhookURL = "https://discord.com/api/webhooks/1361014475255189730/qizJ_NC0hnbtyL-fl2yD86pge4o02gpda_usNq3Rpt36vnos9gkusATGYWk16y53NrVk";
-
-    const payload = {
-      embeds: [
-        {
-          title: `📝 Meldunek dyżurnego Ewid-ST`,
-          color: 16711680, // czerwony
-          fields: [
-            { name: "Zdarzenie", value: zdarzenie },
-            { name: "Treść meldunku", value: tresc },
-            { name: "Czas wysłania", value: czas }
-          ],
-          footer: {
-            text: "System SWD-ST • Automatyczny meldunek"
-          },
-          timestamp: new Date().toISOString()
-        }
-      ]
-    };
-
-    try {
-      await fetch(webhookURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      alert("Meldunek wysłany!");
-      document.getElementById("meldunekZdarzenie").value = "";
-      document.getElementById("meldunekTresc").value = "";
-
-    } catch (error) {
-      alert("Błąd przy wysyłaniu meldunku!");
-      console.error(error);
-    }
+  if (!zdarzenie || !tresc) {
+    alert("Uzupełnij oba pola!");
+    return;
   }
+
+  const webhookURL = "https://discord.com/api/webhooks/1361014475255189730/qizJ_NC0hnbtyL-fl2yD86pge4o02gpda_usNq3Rpt36vnos9gkusATGYWk16y53NrVk";
+
+  const payload = {
+    content: "📢 **Nowy meldunek EWID-ST przesłany przez dyżurnego**",
+    embeds: [
+      {
+        title: `📝 Meldunek dyżurnego Ewid-ST`,
+        color: 65280, // zielony
+        thumbnail: {
+          url: "https://www.gov.pl/attachment/f44797f1-a10a-4225-b55e-191d69bcfda4"
+        },
+        fields: [
+          { name: "Zdarzenie", value: zdarzenie },
+          { name: "Treść meldunku", value: tresc },
+          { name: "Czas wysłania", value: czas }
+        ],
+        footer: {
+          text: "System SWD-ST • Automatyczny meldunek"
+        },
+        timestamp: new Date().toISOString()
+      }
+    ]
+  };
+
+  try {
+    await fetch(webhookURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    alert("Meldunek wysłany!");
+    document.getElementById("meldunekZdarzenie").value = "";
+    document.getElementById("meldunekTresc").value = "";
+
+  } catch (error) {
+    alert("Błąd przy wysyłaniu meldunku!");
+    console.error(error);
+  }
+}
+
 
     const webhookURL = "https://discord.com/api/webhooks/1361026081334755428/jN0OJtmzo0j0tCnJV9BbJ4BDDq7NqRuhiclCmKHqFXuvFcpVNUsXwv_2KXcTX_mZc71U";
 
