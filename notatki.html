@@ -205,15 +205,15 @@ async function wyslijMeldunekEwid() {
     content: "📢 **Nowy meldunek EWID-ST przesłany przez dyżurnego**",
     embeds: [
       {
-        title: `📝 Meldunek dyżurnego Ewid-ST`,
+        title: `📝 Meldunek Ewid-ST`,
         color: 65280, // zielony
         thumbnail: {
-          url: "https://www.gov.pl/attachment/f44797f1-a10a-4225-b55e-191d69bcfda4"
+          url: "https://images-ext-1.discordapp.net/external/llcpafYeO4D4ksPaR4OfOpoWLGr8ukkPJgz3cJbJeco/https/sbihp.pl/wp-content/uploads/2022/04/Panstwowa-Straz-Pozarna.png?format=webp&quality=lossless"
         },
         fields: [
-          { name: "Zdarzenie", value: zdarzenie },
+          { name: "Meldunek dotyczący zdarzenia:", value: zdarzenie },
           { name: "Treść meldunku", value: tresc },
-          { name: "Czas wysłania", value: czas }
+          { name: "Czas zapisu meldunku", value: czas }
         ],
         footer: {
           text: "System SWD-ST • Automatyczny meldunek"
