@@ -188,16 +188,71 @@
     <textarea id="opisRejestr" rows="3" placeholder="Opis zdarzenia..."></textarea>
 
     <button onclick="wyslijRejestr()">Zapisz meldunek w rejestrze</button>
+    <hr>
+    <div class="container">
+      <h2>Wezwanie oficera dyżurującego</h2>
+      <label>Korzystać przy zdarzeniach nadzwyczajnych lub SiŚ>6 zastępów</label>
+      <label for="meldunekZdarzenie">Typ i lokalizacja zdarzenia</label>
+      <input type="text" id="notka" placeholder="Np. Żołynia ul. Wiejska 4, pożar Traw">
+      <button onclick="wezwanieGrupy()">Powiadom</button>
+    </div>
   </div>
 
+
+
   <script>
+
+  function wezwanieGrupy() {
+    const notka = document.getElementById("notka").value.trim();
+    const webhookUrl = "https://discord.com/api/webhooks/1363461191627706521/0taiRCs7KSJAJWebliS4z6-fprUz-MvcquJoAhSDlAev1P5--m9Oi-yqOMMK9p7UQZ3-";
+
+    if (notka === "") {
+      alert("Wpisz lokalizację i typ zdarzenia!");
+      return;
+    }
+
+    const payload = {
+      content: "DO WIADOMOŚCI: \n <@&1363443632950218894> \n <@&1361806261200621588>", // Ping roli
+      embeds: [
+        {
+          title: " Wezwanie oficera dyżurującego",
+          description: `📍 **Zdarzenie:** ${notka}\n⚠️ Wystąpiło zdarzenie nadzwyczajne! \n Wymagane wsparcie operacyjne.`,
+          color: 16711680, // czerwony (hex: #FF0000)
+          thumbnail: {
+            url: "https://cdn-icons-png.freepik.com/512/559/559343.png"
+          },
+          timestamp: new Date().toISOString()
+        }
+      ]
+    };
+
+    fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Powiadomienie wysłane!");
+      } else {
+        alert("Błąd podczas wysyłania powiadomienia.");
+      }
+    })
+    .catch(error => {
+      console.error("Błąd:", error);
+      alert("Wystąpił problem z połączeniem.");
+    });
+  }
+
 async function wyslijMeldunekEwid() {
   const zdarzenie = document.getElementById("meldunekZdarzenie").value.trim();
   const tresc = document.getElementById("meldunekTresc").value.trim();
   const czas = new Date().toLocaleTimeString("pl-PL", { hour: '2-digit', minute: '2-digit' });
 
   if (!zdarzenie || !tresc) {
-    alert("Uzupełnij oba pola!");
+    alert("Uzupełnij pole!");
     return;
   }
 
@@ -304,6 +359,7 @@ function wyslijRejestr() {
     body: JSON.stringify(data)
   }).then(() => alert("Wyjazd zapisany!"));
 }
+
   </script>
 </body>
 </html>
